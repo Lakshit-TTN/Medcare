@@ -1,7 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import {  useParams } from "next/navigation";
+import {  useParams, useRouter } from "next/navigation";
 import DoctorDetails from "@/components/doctorDetail/DoctorDetail";
+import Toast from "@/components/toast/Toast";
+
+
 
 type Doctor = {
   id: string;
@@ -21,9 +24,15 @@ type Doctor = {
 
 export default function DoctorPage() {
   const params = useParams();
+    const router = useRouter();
   const doctorId = params.id as string;
   const [doctor, setDoctor] = useState<Doctor | null>(null);
   const [loading, setLoading] = useState(true);
+    const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
+    const showToast = (message: string, type: "success" | "error" | "info") => {
+      setToast({ message, type });
+    };
+  
 
   useEffect(() => {
     if (!doctorId) return; 
@@ -32,8 +41,11 @@ export default function DoctorPage() {
       try {
         const token = localStorage.getItem("token"); 
         if (!token) {
-          console.error("No authentication token found");
+          showToast("You need to Login first!","error")
           setLoading(false);
+          setTimeout(() => {
+            router.push("/login");
+          }, 2000);
           return;
         }
 
@@ -68,8 +80,14 @@ export default function DoctorPage() {
     fetchDoctor();
   }, [doctorId]);
 
-  if (loading) return <p>Loading doctor details...</p>;
-  if (!doctor) return <p>Doctor not found!</p>;
+  if (loading) return <div>
+                    {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
+                    Loading doctor details...</div>;
+  if (!doctor) return <div>
+                {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
+    Doctor not found!</div>;
 
   return <DoctorDetails doctor={doctor} />;
 }
