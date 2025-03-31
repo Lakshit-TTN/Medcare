@@ -19,16 +19,16 @@ const Login = () => {
   useEffect(() => {
     const checkToken = async () => {
       const storedToken = localStorage.getItem("token");
-      
+
       if (!storedToken) return;
-  
+
       const res = await fetch("http://localhost:5000/api/auth/verify", {
         method: "POST",
         headers: { Authorization: `Bearer ${storedToken}` },
       });
-  
+
       const data = await res.json();
-  
+
       if (!data.valid) {
         showToast("Session expired. Please log in again.", "error");
         localStorage.removeItem("token");
@@ -43,36 +43,36 @@ const Login = () => {
         }, 3000);
       }
     };
-  
+
     checkToken();
   }, []);
-  
-  
+
+
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await res.json();
       console.log("Login Response:", data);
-  
+
       if (!res.ok) {
         showToast("Login failed", "error");
         return;
       }
-  
+
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-  
+
         showToast("Logging in as Admin", "success");
-  
+
         setTimeout(() => {
           router.push("/dashboard");
         }, 3000);
@@ -84,8 +84,8 @@ const Login = () => {
       showToast("Network error. Try again later.", "error");
     }
   };
-  
-  
+
+
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);

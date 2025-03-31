@@ -9,5 +9,5 @@ const router = express.Router();
 router.get("/", getDoctors);//get doctors for appointment page
 router.get("/:id", getDoctorById); // get particular doc
 router.get("/reviews/:doctorId", getDoctorReviews);//to get reviews
-router.post("/rate/:doctorId",rateAndReviewDoctor); // to handle rating
+router.post("/rate/:doctorId", rateAndReviewDoctor); // to handle rating
 export default router;

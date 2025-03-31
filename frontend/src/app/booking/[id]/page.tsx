@@ -18,13 +18,13 @@ export default function Booking() {
     setTimeout(() => {
       setToast(null);
       if (callback) callback();
-    }, 3000); 
+    }, 3000);
   };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      showToast("Login first", "error", () => router.push("/login")); 
+      showToast("Login first", "error", () => router.push("/login"));
     } else {
       setIsAuthenticated(true);
     }

@@ -13,7 +13,7 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (!hydrated) return; 
+    if (!hydrated) return;
 
     const fetchCounts = async () => {
       const token = localStorage.getItem("token");

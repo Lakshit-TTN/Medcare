@@ -43,7 +43,7 @@ const Navbar: FC = () => {
 
     // Remove Google login flag
     localStorage.removeItem("isGoogleLogin");
-    setIsLoggedIn(false); 
+    setIsLoggedIn(false);
 
     // Redirect to login first
     router.push("/login");
@@ -104,8 +104,8 @@ const Navbar: FC = () => {
                     Logout
                   </button>
                   <button className={styles.Ubtn} onClick={handleProfile}>
-                <Image src={'/user.png'} height={10} width={10} alt="user-icon" />
-              </button>
+                    <Image src={'/user.png'} height={10} width={10} alt="user-icon" />
+                  </button>
                 </>
               ) : (
                 <>

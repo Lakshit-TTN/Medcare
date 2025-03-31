@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import fnv from "fnv-plus";
 import pool from "./db.js";
 import dotenv from "dotenv";
-dotenv.config(); 
+dotenv.config();
 
 passport.use(
   new LocalStrategy(
@@ -35,11 +35,11 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:5000/api/auth/google/callback",
     },
-    async (accessToken, refreshToken, profile, done)=>{
-    try {
+    async (accessToken, refreshToken, profile, done) => {
+      try {
         const { id, displayName, emails } = profile;
         const email = emails[0].value;
-        const hashedId = fnv.hash(id).dec(); 
+        const hashedId = fnv.hash(id).dec();
         const shortId = BigInt(hashedId) % BigInt(Number.MAX_SAFE_INTEGER);
         const existingUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 

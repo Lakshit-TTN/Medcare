@@ -196,22 +196,22 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
     fetchAvailableSlots();
   }, [id]);
 
-function generateDates(year: number, month: number) {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // ensures that all dates are compared as whole days,
-  const firstDay = new Date(year, month, 1);
-  const lastDay = new Date(year, month + 1, 0);
-  const daysArray: { date: string; dayName: string; disabled: boolean }[] = [];
-  for (let d = new Date(firstDay); d <= lastDay; d.setDate(d.getDate() + 1)) {
-    const isPast = d < today; 
-    daysArray.push({
-      date: d.toLocaleDateString("en-CA"),
-      dayName: d.toLocaleDateString("en-US", { weekday: "short" }),
-      disabled: isPast, 
-    });
+  function generateDates(year: number, month: number) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // ensures that all dates are compared as whole days,
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const daysArray: { date: string; dayName: string; disabled: boolean }[] = [];
+    for (let d = new Date(firstDay); d <= lastDay; d.setDate(d.getDate() + 1)) {
+      const isPast = d < today;
+      daysArray.push({
+        date: d.toLocaleDateString("en-CA"),
+        dayName: d.toLocaleDateString("en-US", { weekday: "short" }),
+        disabled: isPast,
+      });
+    }
+    return daysArray;
   }
-  return daysArray;
-}
 
   // Fetch available dates 
   useEffect(() => {

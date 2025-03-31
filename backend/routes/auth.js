@@ -16,9 +16,9 @@ router.post("/reset-password", resetPassword);//to reset password
 
 //for admin
 router.post("/verify", (req, res) => {
-    const token = req.headers.authorization?.split(" ")[1];
-    const result = verifyToken(token);
-    res.json(result);
-  });
+  const token = req.headers.authorization?.split(" ")[1];
+  const result = verifyToken(token);
+  res.json(result);
+});
 
 export default router;

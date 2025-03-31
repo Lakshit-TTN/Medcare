@@ -1,12 +1,10 @@
-
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   background: url('/bg.png') no-repeat center center;
-  background-size:103% auto;
+  background-size: 103% auto;
 }
 
 .card {
@@ -126,7 +124,7 @@
 @media (max-width: 480px) {
   .container {
     background: url('/bg.png') no-repeat center center;
-    background-size: cover; 
+    background-size: cover;
     height: calc(100vh - 83px);
     padding: 20px;
   }
@@ -134,19 +132,21 @@
   .card {
     width: 90%;
     max-width: 350px;
-    margin: 10px auto; 
+    margin: 10px auto;
   }
-  .card h2{
+
+  .card h2 {
     font-size: 24px;
   }
-  .card p{
+
+  .card p {
     font-size: 12px;
   }
 }
 
 @media (min-width: 480px) and (max-width: 1172px) {
   .container {
-    background: url('/bg.png') no-repeat center center; 
+    background: url('/bg.png') no-repeat center center;
     background-size: cover;
     height: auto;
     padding: 40px;
@@ -155,7 +155,6 @@
   .card {
     width: 80%;
     max-width: 400px;
-    margin: 15px auto; 
+    margin: 15px auto;
   }
 }
-

@@ -16,7 +16,7 @@ const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
           key={i}
           icon={faStar}
           style={{
-            color: i < filledStars ? "gold" : "gray", 
+            color: i < filledStars ? "gold" : "gray",
             fontSize: "14px",
           }}
         />

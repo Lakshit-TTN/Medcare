@@ -9,22 +9,22 @@ const transporter = nodemailer.createTransport({
 });
 
 const formatDate = (dateString) => {
-    return new Date(dateString).toISOString().split("T")[0];
-  };
+  return new Date(dateString).toISOString().split("T")[0];
+};
 
-  export const sendAppointmentConfirmationEmail = async (
-    email,
-    userName,
-    doctorName,
-    appointmentDate,
-    timeSlot,
-    location,
-    method
-  ) => {
-    const formattedDate = formatDate(appointmentDate);
-    const emailContent =
-      method === "Online"
-        ? `
+export const sendAppointmentConfirmationEmail = async (
+  email,
+  userName,
+  doctorName,
+  appointmentDate,
+  timeSlot,
+  location,
+  method
+) => {
+  const formattedDate = formatDate(appointmentDate);
+  const emailContent =
+    method === "Online"
+      ? `
           <h3>Hello ${userName},</h3>
           <p>Your <b>online</b> appointment with <b>Dr. ${doctorName}</b> has been confirmed.</p>
           <p><b>Date:</b> ${formattedDate}</p>
@@ -34,7 +34,7 @@ const formatDate = (dateString) => {
           <br>
           <p>Thank you for choosing our service!</p>
         `
-        : `
+      : `
           <h3>Hello ${userName},</h3>
           <p>Your <b>offline</b> appointment with <b>Dr. ${doctorName}</b> has been confirmed.</p>
           <p><b>Date:</b> ${formattedDate}</p>
@@ -44,43 +44,42 @@ const formatDate = (dateString) => {
           <br>
           <p>Thank you for choosing our service!</p>
         `;
-  
-    await sendEmail(email, "Appointment Confirmation", emailContent);
-  };
-  
-  export const sendAppointmentCancellationEmail = async (
-    email,
-    userName,
-    doctorName,
-    appointmentDate,
-    timeSlot,
-    location
-  ) => {
-    const formattedDate = formatDate(appointmentDate);
-    const emailContent = `
+
+  await sendEmail(email, "Appointment Confirmation", emailContent);
+};
+
+export const sendAppointmentCancellationEmail = async (
+  email,
+  userName,
+  doctorName,
+  appointmentDate,
+  timeSlot,
+  location
+) => {
+  const formattedDate = formatDate(appointmentDate);
+  const emailContent = `
       <h3>Hello ${userName},</h3>
       <p>We regret to inform you that your appointment at${location} with <b>Dr. ${doctorName}</b> on <b>${formattedDate}</b> at <b>${timeSlot}</b> has been cancelled.</p>
       <p>If you need to reschedule, please book a new appointment at your convenience or contact our helpline </p>
       <br>
       <p>We apologize for any inconvenience caused.</p>
     `;
-  
-    await sendEmail(email, "Appointment Cancellation", emailContent);
-  };
-  
-  const sendEmail = async (email, subject, htmlContent) => {
-    try {
-      const mailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject,
-        html: htmlContent,
-      };
-  
-      await transporter.sendMail(mailOptions);
-      console.log(`${subject} email sent successfully to`, email);
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
-  };
-  
+
+  await sendEmail(email, "Appointment Cancellation", emailContent);
+};
+
+const sendEmail = async (email, subject, htmlContent) => {
+  try {
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject,
+      html: htmlContent,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log(`${subject} email sent successfully to`, email);
+  } catch (error) {
+    console.error("Error sending email:", error);
+  }
+};

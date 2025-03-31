@@ -1,6 +1,6 @@
 .container {
   padding: 20px;
-  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(24,121,9,1) 92%);
+  background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(24, 121, 9, 1) 92%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@
 .filterContainer select {
   padding: 8px 12px;
   font-size: 16px;
-  border: 2px solid rgba(24,121,9,1);
+  border: 2px solid rgba(24, 121, 9, 1);
   border-radius: 5px;
   background-color: white;
   color: #333;
@@ -41,7 +41,7 @@
 }
 
 .filterContainer select:hover {
-  border-color:  rgba(24,121,9,1);
+  border-color: rgba(24, 121, 9, 1);
 }
 
 .appointmentsTableContainer {
@@ -62,7 +62,7 @@
 }
 
 .appointmentsTable th {
-  background-color: rgba(24,121,9,1);
+  background-color: rgba(24, 121, 9, 1);
   color: white;
   padding: 12px;
   text-align: left;
@@ -118,7 +118,7 @@
 .pagination button {
   padding: 8px 12px;
   border: none;
-  background-color: rgba(24,121,9,1);
+  background-color: rgba(24, 121, 9, 1);
   color: white;
   font-size: 14px;
   border-radius: 5px;

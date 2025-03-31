@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post("/upload", upload.single("image"), async (req, res) => {
   try {
-    const imageUrl = req.file?.path; 
+    const imageUrl = req.file?.path;
     if (!imageUrl) {
       return res.status(400).json({ message: "Image is required" });
     }

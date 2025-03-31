@@ -11,7 +11,7 @@ interface DoctorCardProps {
   specialty: string;
   experience?: number;
   average_rating: number;
-  qualifications:string[];
+  qualifications: string[];
   image_url: string;
 }
 
@@ -24,10 +24,10 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
   qualifications,
   image_url,
 }) => {
-  const formattedRating = Number(average_rating) || 0; 
+  const formattedRating = Number(average_rating) || 0;
 
   const router = useRouter();
-  
+
   const handleBookAppointment = (event: React.MouseEvent) => {
     event.stopPropagation();
     router.push(`/booking/${id}`);
@@ -42,7 +42,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
   return hydrated ? (
     <div className={styles.card} onClick={handleCardClick}>
       <div className={styles.imageContainer}>
-      <Image src={image_url.startsWith("https") ? image_url : `${image_url}`} alt={name} width={100} height={100} />
+        <Image src={image_url.startsWith("https") ? image_url : `${image_url}`} alt={name} width={100} height={100} />
       </div>
 
       <div className={styles.info}>
@@ -56,7 +56,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
       <p className={styles.rating}>
         Ratings : <StarRating rating={formattedRating} />
       </p>
-      
+
       <button className={styles.bookBtn} onClick={handleBookAppointment}>Book Appointment</button>
 
     </div>

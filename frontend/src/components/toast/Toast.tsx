@@ -15,7 +15,7 @@ const Toast: React.FC<ToastProps> = ({ message, type = "info", onClose }) => {
     const timer = setTimeout(() => {
       setVisible(false);
       onClose();
-    }, 3000); 
+    }, 3000);
 
     return () => clearTimeout(timer)//to clear timer if when unmounts
   }, [onClose]);

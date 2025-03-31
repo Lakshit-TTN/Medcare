@@ -4,9 +4,9 @@ export const rateAndReviewDoctor = async (req, res) => {
   try {
     const { doctorId } = req.params;
     const { rating, review_text } = req.body;
-    const user_id = req.user?.id; 
+    const user_id = req.user?.id;
 
-    const response = await rateAndReviewDoctorService(doctorId, rating, review_text , user_id);
+    const response = await rateAndReviewDoctorService(doctorId, rating, review_text, user_id);
 
     res.json(response);
   } catch (error) {

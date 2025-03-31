@@ -79,7 +79,7 @@ export const addDoctor = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
     console.log(diseases);
-    
+
     const doctor = await addDoctorService(req.body);
     res.status(201).json({ message: "Doctor added successfully", doctor });
   } catch (error) {

@@ -56,8 +56,8 @@ const DoctorsPage: React.FC = () => {
             params.delete("searchTerm");
             router.replace(`?${params.toString()}`, { scroll: false });
         }
-        setSearchQuery(""); 
-        setSearchTerm(""); 
+        setSearchQuery("");
+        setSearchTerm("");
     }, []);
 
     const fetchDoctors = useCallback(async () => {
@@ -74,7 +74,7 @@ const DoctorsPage: React.FC = () => {
                 if (experienceFilter.max !== null) {
                     params.append("experience", `${experienceFilter.min}-${experienceFilter.max}`);
                 } else {
-                    params.append("experience", `${experienceFilter.min}+`); 
+                    params.append("experience", `${experienceFilter.min}+`);
                 }
             }
             if (genderFilter !== null) params.append("gender", genderFilter);
@@ -131,7 +131,7 @@ const DoctorsPage: React.FC = () => {
                 if (max !== null) {
                     params.set("experience", `${min}-${max}`);
                 } else {
-                    params.set("experience", `${min}+`); 
+                    params.set("experience", `${min}+`);
                 }
             } else {
                 params.delete("experience");
@@ -142,19 +142,19 @@ const DoctorsPage: React.FC = () => {
             params.set("gender", newFilters.gender || "");
         }
         if (newFilters.reset) {
-            setSearchTerm(""); 
+            setSearchTerm("");
             setSearchQuery("");
             params.delete("searchTerm");
-            params.delete("rating"); 
-            params.delete("gender"); 
+            params.delete("rating");
+            params.delete("gender");
         }
-        params.set("page", "1"); 
+        params.set("page", "1");
         router.push(`?${params.toString()}`);
     };
 
     const handleSearch = () => {
-        if (!searchTerm.trim()) return; 
-        setSearchQuery(searchTerm); 
+        if (!searchTerm.trim()) return;
+        setSearchQuery(searchTerm);
         setCurrentPage(1);
         const params = new URLSearchParams();
         if (ratingFilter !== null) params.append("rating", ratingFilter.toString());
@@ -169,7 +169,7 @@ const DoctorsPage: React.FC = () => {
         if (genderFilter !== null) params.append("gender", genderFilter);
         params.append("page", "1");
         if (!searchTerm.trim()) {
-            params.delete("searchTerm"); 
+            params.delete("searchTerm");
         } else {
             params.append("searchTerm", searchTerm.trim());
         }
@@ -178,7 +178,7 @@ const DoctorsPage: React.FC = () => {
     };
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchTerm(e.target.value); 
+        setSearchTerm(e.target.value);
     };
 
     const handlePageChange = (newPage: number) => {
@@ -286,7 +286,7 @@ const DoctorsPage: React.FC = () => {
                                                     experienceFilter?.max === range.max
                                                     ? null
                                                     : { min: range.min, max: range.max },
-                                        })}/>
+                                        })} />
                                 {range.label} years
                             </label>
                         ))}

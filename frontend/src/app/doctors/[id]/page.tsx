@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import {  useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import DoctorDetails from "@/components/doctorDetail/DoctorDetail";
 import Toast from "@/components/toast/Toast";
 
@@ -24,24 +24,24 @@ type Doctor = {
 
 export default function DoctorPage() {
   const params = useParams();
-    const router = useRouter();
+  const router = useRouter();
   const doctorId = params.id as string;
   const [doctor, setDoctor] = useState<Doctor | null>(null);
   const [loading, setLoading] = useState(true);
-    const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
-    const showToast = (message: string, type: "success" | "error" | "info") => {
-      setToast({ message, type });
-    };
-  
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
+  const showToast = (message: string, type: "success" | "error" | "info") => {
+    setToast({ message, type });
+  };
+
 
   useEffect(() => {
-    if (!doctorId) return; 
+    if (!doctorId) return;
     console.log(`Fetching doctor with ID: ${doctorId}`);
     async function fetchDoctor() {
       try {
-        const token = localStorage.getItem("token"); 
+        const token = localStorage.getItem("token");
         if (!token) {
-          showToast("You need to Login first!","error")
+          showToast("You need to Login first!", "error")
           setLoading(false);
           setTimeout(() => {
             router.push("/login");
@@ -56,17 +56,17 @@ export default function DoctorPage() {
             "Content-Type": "application/json",
           },
         });
-    
+
         if (response.status === 401) {
           console.error("Unauthorized! Redirecting to login...");
-          window.location.href = "/login"; 
+          window.location.href = "/login";
           return;
         }
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-    
+
         const data = await response.json();
         setDoctor(data);
       } catch (error) {
@@ -75,17 +75,17 @@ export default function DoctorPage() {
         setLoading(false);
       }
     }
-    
-    
+
+
     fetchDoctor();
   }, [doctorId]);
 
   if (loading) return <div>
-                    {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+    {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
-                    Loading doctor details...</div>;
+    Loading doctor details...</div>;
   if (!doctor) return <div>
-                {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+    {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
     Doctor not found!</div>;
 

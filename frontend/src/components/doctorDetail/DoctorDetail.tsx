@@ -16,7 +16,7 @@ interface Doctor {
   hospital: string[];
   bio: string;
   availability: string[];
-  reviews:{ name: string; comment: string; rating: number }[];
+  reviews: { name: string; comment: string; rating: number }[];
 }
 
 const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
@@ -41,11 +41,11 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
     showToast("Unauthorized: No token found. Please log in.", "error");
     return;
   }
- 
+
 
   const fetchReviews = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors/reviews/${doctor.id}`,{
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors/reviews/${doctor.id}`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -57,7 +57,7 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
       }
       if (response.status === 401) {
         console.error("Unauthorized! Redirecting to login...");
-        window.location.href = "/login"; 
+        window.location.href = "/login";
         return;
       }
       const data = await response.json();
@@ -83,7 +83,7 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
       return;
     }
     setSubmitting(true);
-    
+
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors/rate/${doctor.id}`, {
         method: "POST",
@@ -98,7 +98,7 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
       });
       if (response.status === 401) {
         console.error("Unauthorized! Redirecting to login...");
-        window.location.href = "/login"; 
+        window.location.href = "/login";
         return;
       }
       if (response.ok) {

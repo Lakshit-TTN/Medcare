@@ -3,7 +3,7 @@ import pool from "../config/db.js";
 export const fetchDoctors = async (queryParams) => {
   const { rating, experience, gender, page, limit, searchTerm } = queryParams;
   console.log("Received filters:", { rating, experience, gender, searchTerm });
-  
+
   let minExpValue = null;
   let maxExpValue = null;
 

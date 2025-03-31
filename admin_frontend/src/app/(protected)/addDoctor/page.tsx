@@ -51,7 +51,7 @@ const AddDoctor = () => {
       doctor.hospital.trim() &&
       doctor.diseases.trim() &&
       doctor.availability.time.trim() &&
-      doctor.imageUrl 
+      doctor.imageUrl
     );
   };
 
@@ -166,7 +166,7 @@ const AddDoctor = () => {
 
           <input className={styles.input} type="text" name="hospital" placeholder="Available Hospitals (comma-separated)" required onChange={handleChange} />
           <input className={styles.input} type="text" name="diseases" placeholder="Diseases Treated (comma-separated)" required onChange={handleChange} />
-          
+
           <div className={styles.availabilityContainer}>
             <label className={styles.availabilityLabel}>Availability</label>
             <div className={styles.availabilityInputs}>
