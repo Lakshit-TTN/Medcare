@@ -52,25 +52,24 @@ export const fetchAvailableDates = async () => {
   if (startDate === lastDayOfMonth) {
     startDate = 1;
     currentMonth += 1;
-
     if (currentMonth > 11) {
       currentMonth = 0;
     }
   }
   const availableDates = [];
   const daysToFetch = 30;
+
+  // now this generates an array of the next 30 dates starting from today
   for (let i = 0; i < daysToFetch; i++) {
     const nextDate = new Date(currentYear, currentMonth, startDate + i);
     const year = nextDate.getFullYear();
-    const month = String(nextDate.getMonth() + 1).padStart(2, "0");
+    const month = String(nextDate.getMonth() + 1).padStart(2, "0");// if less than 2 char it add 0(for formatting).
     const day = String(nextDate.getDate()).padStart(2, "0");
     availableDates.push(`${year}-${month}-${day}`);
   }
   console.log("Fixed Available Dates:", availableDates);
   return availableDates;
 };
-
-
 
 // Fetch all appointments
 export const fetchAllAppointments = async () => {
