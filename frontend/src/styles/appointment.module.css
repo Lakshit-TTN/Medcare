@@ -1,9 +1,4 @@
-:root {
-  --primary-green: #1C4A2A;
-  --text-muted: #8C8C8C;
-  --background-light: #F5F5F5;
-  --button-green: #1C4A2A;
-}
+
 .container {
   display: flex;
   height: calc(100vh - 99.2px);

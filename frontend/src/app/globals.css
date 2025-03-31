@@ -10,3 +10,9 @@ body {
   font-family: "Montserrat", sans-serif;  
 }
 
+:root {
+  --primary-green: #1C4A2A;
+  --text-muted: #8C8C8C;
+  --background-light: #F5F5F5;
+  --button-green: #1C4A2A;
+}
