@@ -21,6 +21,18 @@ export const createAppointment = async (user_id, doctor_id, appointment_date, ti
     throw { status: 400, message: "Appointments can only be booked within the next 30 days." };
   }
 
+  const checkQuery = `
+    SELECT * FROM appointments
+    WHERE user_id = $1 AND doctor_id = $2 AND appointment_date = $3 AND time_slot = $4 AND method = $5
+  `;
+  const checkValues = [user_id, doctor_id, appointment_date, time_slot, booking_type];
+  const checkResult = await pool.query(checkQuery, checkValues);
+
+  if (checkResult.rows.length > 0) {
+    throw { status: 409, message: "You have already booked this appointment." };
+  }
+
+
   const query = `
     INSERT INTO appointments (user_id, doctor_id, appointment_date, time_slot, method, status, created_at, location)
     VALUES ($1, $2, $3, $4, $5, 'pending', NOW(), $6) 

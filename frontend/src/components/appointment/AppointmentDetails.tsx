@@ -277,6 +277,13 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
         router.push("/login");
         return;
       }
+      if (response.status === 409) {
+        showToast(" You have already booked for the same slot.", "error");
+        setTimeout(()=>{
+          router.push("/appointments");
+        },2000)
+        return;
+      }
       if (!response.ok) throw new Error("Failed to book appointment");
       localStorage.setItem("appointment", JSON.stringify({
         doctorName: doctor?.name,
