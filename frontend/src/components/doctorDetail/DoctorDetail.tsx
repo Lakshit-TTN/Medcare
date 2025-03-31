@@ -5,12 +5,6 @@ import Link from "next/link";
 import StarRating from "../rating/Rating";
 import Toast from "../toast/Toast";
 
-
-interface Review {
-  name: string;
-  comment: string;
-}
-
 interface Doctor {
   id: string;
   name: string;
@@ -90,7 +84,6 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
     }
     setSubmitting(true);
     
-    const userName = localStorage.getItem("userName") || "Anonymous";
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors/rate/${doctor.id}`, {
         method: "POST",

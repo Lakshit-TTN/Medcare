@@ -27,6 +27,8 @@ const Login = () => {
     }, 2000);
   }, [tokenFromGoogle]);
 
+  //Without isGoogleLogin, the second useEffect will trigger when the user visits the login page again.
+  //When logging out, you only remove the token from localStorage, but the user is still logged into their Google account so we used a new key
   useEffect(() => {
     const checkStoredToken = () => {
       if (localStorage.getItem("isGoogleLogin") === "true") return;
