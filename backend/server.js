@@ -20,6 +20,7 @@ app.use(
     credentials: true,
   })
 );
+
 app.use("/public", express.static("public"));
 app.use(passport.initialize());
 

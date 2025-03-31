@@ -13,6 +13,8 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 router.get("/google/callback", googleAuthCallback); // after google login , callback url
 router.post("/forgot-password", forgotPassword);//forgot password
 router.post("/reset-password", resetPassword);//to reset password
+
+//for admin
 router.post("/verify", (req, res) => {
     const token = req.headers.authorization?.split(" ")[1];
     const result = verifyToken(token);
