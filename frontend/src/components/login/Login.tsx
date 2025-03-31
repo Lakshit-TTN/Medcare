@@ -20,18 +20,15 @@ const Login = () => {
   useEffect(() => {
     if (!tokenFromGoogle) return; //asonly for google we get in out params 
     localStorage.setItem("token", tokenFromGoogle);
-    localStorage.setItem("isGoogleLogin", "true"); //Save login source only for google
     showToast("Logged in successfully!", "success");
     setTimeout(() => {
       router.push("/appointments");
     }, 2000);
   }, [tokenFromGoogle]);
 
-  //Without isGoogleLogin, the second useEffect will trigger when the user visits the login page again.
-  //When logging out, you only remove the token from localStorage, but the user is still logged into their Google account so we used a new key
+
   useEffect(() => {
     const checkStoredToken = () => {
-      if (localStorage.getItem("isGoogleLogin") === "true") return;
       const storedToken = localStorage.getItem("token");
       if (storedToken && storedToken !== "null") {
         showToast("Already Logged In", "info");
