@@ -67,7 +67,6 @@ export const fetchAvailableDates = async () => {
     const day = String(nextDate.getDate()).padStart(2, "0");
     availableDates.push(`${year}-${month}-${day}`);
   }
-  console.log("Fixed Available Dates:", availableDates);
   return availableDates;
 };
 

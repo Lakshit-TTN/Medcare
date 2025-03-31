@@ -1,6 +1,6 @@
 import pool from "../config/db.js";
 
-export const rateAndReviewDoctorService = async (doctorId, rating, review_text, name, user_id) => {
+export const rateAndReviewDoctorService = async (doctorId, rating, review_text , user_id) => {
 
   const doctorResult = await pool.query(
     `SELECT total_rating, rating_count, average_rating, COALESCE(reviews, '[]'::jsonb) AS reviews 

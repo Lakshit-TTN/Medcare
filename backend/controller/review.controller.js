@@ -6,7 +6,7 @@ export const rateAndReviewDoctor = async (req, res) => {
     const { rating, review_text } = req.body;
     const user_id = req.user?.id; 
 
-    const response = await rateAndReviewDoctorService(doctorId, rating, review_text, name, user_id);
+    const response = await rateAndReviewDoctorService(doctorId, rating, review_text , user_id);
 
     res.json(response);
   } catch (error) {

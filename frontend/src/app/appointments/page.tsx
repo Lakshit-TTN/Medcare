@@ -182,7 +182,7 @@ const DoctorsPage: React.FC = () => {
     };
 
     const handlePageChange = (newPage: number) => {
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(window.location.search);//so that the filters persists
         if (ratingFilter !== null) params.set("rating", ratingFilter.toString());
         if (experienceFilter !== null) {
             const { min, max } = experienceFilter;

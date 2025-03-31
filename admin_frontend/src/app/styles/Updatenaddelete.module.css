@@ -245,11 +245,9 @@
 }
 
 .buttonGroup {
-  grid-column: 1 / -1;
   display: flex;
   justify-content: space-between;
-  gap: 15px;
-  margin-top: 20px;
+  margin-top: 1px;
 }
 
 .saveButton,
@@ -298,11 +296,7 @@
   }
 }
 
-.buttonGroup {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1px;
-}
+
 
 .buttonGroup button {
   padding: 10px 15px;

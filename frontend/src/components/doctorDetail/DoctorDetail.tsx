@@ -41,12 +41,30 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
   };
 
   useEffect(() => setHydrated(true), []);
+  const token = localStorage.getItem("token"); // Get stored token
+
+  if (!token) {
+    showToast("Unauthorized: No token found. Please log in.", "error");
+    return;
+  }
+ 
 
   const fetchReviews = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors/reviews/${doctor.id}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/doctors/reviews/${doctor.id}`,{
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch reviews");
+      }
+      if (response.status === 401) {
+        console.error("Unauthorized! Redirecting to login...");
+        window.location.href = "/login"; 
+        return;
       }
       const data = await response.json();
       console.log("Fetched Reviews:", data.reviews);
@@ -85,7 +103,11 @@ const DoctorDetails: React.FC<{ doctor: Doctor }> = ({ doctor }) => {
           review_text: reviewText.trim() || null,
         }),
       });
-
+      if (response.status === 401) {
+        console.error("Unauthorized! Redirecting to login...");
+        window.location.href = "/login"; 
+        return;
+      }
       if (response.ok) {
         showToast("Review submitted successfully!", "success");
         setShowPopup(false);
