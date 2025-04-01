@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import passport from "./config/passportConfig.js";
-import authRoutes from "./routes/auth.js"; // Add `.js` extension
-import doctorRoutes from "./routes/doctors.js"; // Add `.js` extension
-import appointmentRoutes from "./routes/appointments.js"; // Add `.js` extension
-import adminRoutes from "./routes/admin.js"; // Add `.js` extension
-import upload from "./routes/upload.js"; // Add `.js` extension
-import user from "./routes/user.js"; // Add `.js` extension
+import authRoutes from "./routes/auth.js";
+import doctorRoutes from "./routes/doctors.js";
+import appointmentRoutes from "./routes/appointments.js";
+import adminRoutes from "./routes/admin.js";
+import upload from "./routes/upload.js";
+import user from "./routes/user.js";
 import { authenticateAdmin } from "./middleware/isAdmin.js";
 import authenticateUser from "./middleware/authMiddleware.js";
 

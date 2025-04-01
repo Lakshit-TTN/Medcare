@@ -42,7 +42,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({
   return hydrated ? (
     <div className={styles.card} onClick={handleCardClick}>
       <div className={styles.imageContainer}>
-        <Image src={image_url.startsWith("https") ? image_url : `${image_url}`} alt={name} width={100} height={100} />
+        <Image src={image_url.startsWith("https") ? image_url : `${image_url}`} alt={name} width={120} height={120} />
       </div>
 
       <div className={styles.info}>

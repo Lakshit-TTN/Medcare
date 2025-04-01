@@ -95,9 +95,9 @@ export const fetchDoctors = async (queryParams) => {
 
   query += ` LIMIT $${values.length + 1} OFFSET $${values.length + 2}`;
   values.push(pageSize, offset);
-  console.log("Executing Query:", query, values);
-  console.log("Executing Count Query:", countQuery, countValues);
-
+  // console.log("Executing Query:", query, values);
+  // console.log("Executing Count Query:", countQuery, countValues);
+  
   const doctors = await pool.query(query, values);
   const totalCountResult = await pool.query(countQuery, countValues);
   const totalDoctors = parseInt(totalCountResult.rows[0].count, 10);

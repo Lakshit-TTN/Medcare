@@ -284,6 +284,11 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
         },2000)
         return;
       }
+      if (response.status === 400 ) {
+        showToast("Appointments can be booked starting from next day", "error");
+        return;
+      }
+     
       if (!response.ok) throw new Error("Failed to book appointment");
       localStorage.setItem("appointment", JSON.stringify({
         doctorName: doctor?.name,
