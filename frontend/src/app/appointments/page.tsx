@@ -50,15 +50,6 @@ const DoctorsPage: React.FC = () => {
     const showToast = (message: string, type: "success" | "error" | "info") => {
         setToast({ message, type });
     };
-    useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        if (params.has("searchTerm")) {
-            params.delete("searchTerm");
-            router.replace(`?${params.toString()}`, { scroll: false });
-        }
-        setSearchQuery("");
-        setSearchTerm("");
-    }, []);
 
     const fetchDoctors = useCallback(async () => {
         try {
