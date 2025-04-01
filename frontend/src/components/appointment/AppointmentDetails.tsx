@@ -198,7 +198,7 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
 
   function generateDates(year: number, month: number) {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); // ensures that all dates are compared as whole days,
+    today.setHours(0, 0, 0, 0); 
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const daysArray: { date: string; dayName: string; disabled: boolean }[] = [];
