@@ -15,7 +15,7 @@ export const fetchDoctorReviews = async (doctorId) => {
 };
 
 //jsonb_array_elements(d.reviews) - expands this JSON array into multiple rows, one per review.
-//Using LATERAL, you extract each review separately and match it with the user and allows the jsonb_array_elements() function to reference the d.reviews column within the same query.
+//Using LATERAL, you extract each review separately fro each row and match it with the user 
 //Each review contains a user_id field (as JSON).
 // review_data->>'user_id' extracts the user_id as text.
 
