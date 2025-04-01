@@ -46,7 +46,7 @@
 }
 
 .googleButton {
-  background-color: #378ef0; /* Google Red */
+  background-color: #378ef0;
   color: white;
   font-weight: 600;
   padding: 10px;
@@ -157,7 +157,6 @@
   .container {
     background: url('/bg.png') no-repeat center center;
     background-size: cover; 
-    height: calc(100vh - 83px);
     padding: 20px;
   }
 
@@ -174,11 +173,9 @@
   }
 }
 
-@media (min-width: 480px) and (max-width: 1172px) {
+@media (min-width: 480px) and (max-width: 1290px) {
   .container {
-    background: url('/bg.png') no-repeat center center; 
-    background-size: cover;
-    height: auto;
+    background: url('/bg.png') no-repeat center center/cover; 
     padding: 40px;
   }
 

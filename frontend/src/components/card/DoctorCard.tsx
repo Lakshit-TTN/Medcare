@@ -5,7 +5,7 @@ import styles from "../../styles/DoctorCard.module.css";
 import { useRouter } from "next/navigation";
 import StarRating from "../rating/Rating";
 
-interface DoctorCardProps {
+type DoctorCardProps = {
   id: string;
   name: string;
   specialty: string;

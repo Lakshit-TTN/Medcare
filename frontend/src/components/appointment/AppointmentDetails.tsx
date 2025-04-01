@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import styles from "../../styles/appointment.module.css";
 import Toast from "../toast/Toast";
 
-interface AppointmentProps {
+type AppointmentProps = {
   id: string | null;
 }
 

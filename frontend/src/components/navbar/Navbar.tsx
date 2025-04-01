@@ -37,23 +37,9 @@ const Navbar: FC = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Remove token
-
-    // Check if the user logged in via Google
-    const isGoogleLogin = localStorage.getItem("isGoogleLogin");
-
-    // Remove Google login flag
-    localStorage.removeItem("isGoogleLogin");
     setIsLoggedIn(false);
-
     // Redirect to login first
     router.push("/login");
-
-    // If the user logged in via Google, log them out from Google 
-    if (isGoogleLogin === "true") {
-      setTimeout(() => {
-        window.open("https://accounts.google.com/Logout", "_blank");
-      }, 1000);
-    }
   };
 
   const handleProfile = () => {

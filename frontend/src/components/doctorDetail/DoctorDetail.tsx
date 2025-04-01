@@ -5,7 +5,7 @@ import Link from "next/link";
 import StarRating from "../rating/Rating";
 import Toast from "../toast/Toast";
 
-interface Doctor {
+type Doctor = {
   id: string;
   name: string;
   specialty: string;

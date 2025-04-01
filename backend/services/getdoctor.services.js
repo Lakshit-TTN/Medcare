@@ -55,6 +55,10 @@ export const fetchDoctors = async (queryParams) => {
     countValues.push(searchPattern, searchPattern, searchPattern);
   }
 
+  // Uses unnest(diseases) to convert an array column into multiple rows find atleast 1.
+
+
+
   if (ratingValue) {
     const lowerBound = ratingValue - 0.5;
     const upperBound = ratingValue + 0.5;
