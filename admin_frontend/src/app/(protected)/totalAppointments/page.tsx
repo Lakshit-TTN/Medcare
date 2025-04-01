@@ -51,6 +51,12 @@ const TotalApp = () => {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (res.status === 403 || res.status === 401) {
+        showToast("You must be logged in to add a doctor.", "error");
+        setTimeout(() => {
+          router.push('/')
+        }, 2000);
+      }
       if (!res.ok) {
         throw new Error("Failed to fetch appointments");
       }

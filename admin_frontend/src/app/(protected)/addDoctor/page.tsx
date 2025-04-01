@@ -102,10 +102,17 @@ const AddDoctor = () => {
           ...doctor,
           qualifications: doctor.qualifications.split(","),
           hospital: doctor.hospital.split(","),
-          diseases: doctor.diseases.split(",").map((d) => d.trim()), // Ensure diseases are properly split
+          diseases: doctor.diseases.split(",").map((d) => d.trim()),
           availability: formattedAvailability,
         }),
+       
       });
+      if (res.status === 403 || res.status === 401) {
+        showToast("You must be logged in to add a doctor.", "error");
+        setTimeout(() => {
+          router.push('/')
+        }, 2000);
+      }
 
       if (!res.ok) throw new Error("Failed to add doctor");
       showToast("Doctor added successfully!", "success");

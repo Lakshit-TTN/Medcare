@@ -19,14 +19,11 @@ const Login = () => {
   useEffect(() => {
     const checkToken = async () => {
       const storedToken = localStorage.getItem("token");
-
       if (!storedToken) return;
-
       const res = await fetch("http://localhost:5000/api/auth/verify", {
         method: "POST",
         headers: { Authorization: `Bearer ${storedToken}` },
       });
-
       const data = await res.json();
 
       if (!data.valid) {
@@ -37,17 +34,24 @@ const Login = () => {
           router.push("/");
         }, 3000);
       } else {
-        showToast("Already Logged In", "info");
-        setTimeout(() => {
-          router.push("/dashboard");
-        }, 3000);
+        if (data.user.role !== "admin") {
+          showToast("You don't have permission to log in as an Admin.", "error");
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          setTimeout(() => {
+            router.push("/");
+          }, 3000);
+        } else {
+          showToast("Already Logged In", "info");
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 3000);
+        }
       }
     };
 
     checkToken();
   }, []);
-
-
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,14 +67,23 @@ const Login = () => {
       console.log("Login Response:", data);
 
       if (!res.ok) {
-        showToast("Login failed", "error");
+        if (res.status === 403) {
+          showToast("You don't have permission to log in as an Admin.", "error");
+          return;
+        }
+        showToast("Login failed. Please check your credentials.", "error");
         return;
       }
 
       if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-
+        if (data.user.role !== "admin") {
+          showToast("You don't have permission to log in as an Admin.", "error");
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          return;
+        }
         showToast("Logging in as Admin", "success");
 
         setTimeout(() => {
@@ -84,8 +97,6 @@ const Login = () => {
       showToast("Network error. Try again later.", "error");
     }
   };
-
-
 
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => setHydrated(true), []);

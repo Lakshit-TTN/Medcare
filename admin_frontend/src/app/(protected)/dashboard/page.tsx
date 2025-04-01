@@ -2,11 +2,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/dashboard.module.css";
 import { useRouter } from "next/navigation";
+import Toast from "@/components/toast/Toast";
 
 const Dashboard = () => {
   const router = useRouter();
   const [totalDoctors, setTotalDoctors] = useState<number | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
+
+  const showToast = (message: string, type: "success" | "error" | "info") => {
+    setToast({ message, type });
+  };
 
   useEffect(() => {
     setHydrated(true);
@@ -17,6 +23,11 @@ const Dashboard = () => {
 
     const fetchCounts = async () => {
       const token = localStorage.getItem("token");
+      if (!token) {
+        showToast("You must be logged in to add a doctor.", "error");
+        return;
+      }
+
       try {
         const doctorsRes = await fetch("http://localhost:5000/api/admin/doctors/count", {
           method: "GET",
@@ -25,8 +36,12 @@ const Dashboard = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        if (!doctorsRes.ok) throw new Error("Failed to fetch");
-
+        if (doctorsRes.status === 403 || doctorsRes.status === 401) {
+          showToast("You must be logged in to add a doctor.", "error");
+          setTimeout(() => {
+            router.push('/')
+          }, 2000);
+        }
         const doctorsData = await doctorsRes.json();
         setTotalDoctors(doctorsData.count);
       } catch (error) {
@@ -37,11 +52,10 @@ const Dashboard = () => {
     fetchCounts();
   }, [hydrated]);
 
-
-
-
   return hydrated ? (
     <div className={styles.container}>
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+
       <h2 className={styles.header}>Admin Dashboard</h2>
 
       <div className={styles.totalDoctors}>

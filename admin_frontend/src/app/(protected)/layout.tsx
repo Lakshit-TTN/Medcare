@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Toast from "@/components/toast/Toast";
 
 
 export default function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem("token");
@@ -22,7 +24,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
         });
-
+      
         const data = await res.json();
         if (!data.valid) {
           setTimeout(() => {
@@ -51,6 +53,7 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
 
   return isAuthenticated ? (
     <>
+      
       {children}
     </>
   ) : null;
