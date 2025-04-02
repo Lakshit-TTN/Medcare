@@ -18,8 +18,9 @@ const Login = () => {
   useEffect(() => setHydrated(true), []);
 
   useEffect(() => {
-    if (!tokenFromGoogle) return;
+    if (!tokenFromGoogle) return; //asonly for google we get in out params 
     localStorage.setItem("token", tokenFromGoogle);
+    localStorage.setItem("isGoogleLogin", "true"); //Save login source only for google
     showToast("Logged in successfully!", "success");
     setTimeout(() => {
       router.push("/appointments");

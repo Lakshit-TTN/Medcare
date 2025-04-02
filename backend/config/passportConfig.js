@@ -51,7 +51,6 @@ passport.use(
           [shortId, displayName, email]
         );
         return done(null, newUser.rows[0]);
-        //the first argument is null because there is no error.
       } catch (err) {
         return done(err, null);
       }

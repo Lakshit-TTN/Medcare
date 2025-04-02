@@ -12,7 +12,6 @@ export const getBookedSlots = async (req, res) => {
     if (!doctor_id || !appointment_date) {
       return res.status(400).json({ message: "Doctor ID and Date are required" });
     }
-
     const bookedSlots = await fetchBookedSlots(doctor_id, appointment_date);
     res.json({ bookedSlots });
   } catch (error) {
