@@ -30,6 +30,8 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
     setToast({ message, type });
   };
 
+  useEffect(() => setHydrated(true), []); // So that no hydratioin error comes
+
   // to update the displayed month name
   useEffect(() => {
     const monthNames = [
@@ -38,8 +40,6 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
     ];
     setCurrentMonth(monthNames[currentMonthIndex]);
   }, [currentMonthIndex]);
-
-  useEffect(() => setHydrated(true), []); // So that no hydratioin error comes
 
   // Handlers for changing months
   const prevMonth = () => {
@@ -88,7 +88,6 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
     }
   }, []);
 
-
   // thisn fetches booked slots for the selected doctor and date
   useEffect(() => {
     console.log("Fetching:", id);
@@ -114,7 +113,6 @@ const Appointment: React.FC<AppointmentProps> = ({ id }) => {
     }
     fetchBookedSlots();
   }, [id, selectedDate]);
-
 
   // sets doctors details 
   useEffect(() => {

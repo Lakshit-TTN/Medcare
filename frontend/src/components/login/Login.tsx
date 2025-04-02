@@ -18,7 +18,7 @@ const Login = () => {
   useEffect(() => setHydrated(true), []);
 
   useEffect(() => {
-    if (!tokenFromGoogle) return; //asonly for google we get in out params 
+    if (!tokenFromGoogle) return;
     localStorage.setItem("token", tokenFromGoogle);
     showToast("Logged in successfully!", "success");
     setTimeout(() => {

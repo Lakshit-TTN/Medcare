@@ -75,8 +75,8 @@ export const fetchAvailableDates = async () => {
   for (let i = 0; i < daysToFetch; i++) {
     const nextDate = new Date(currentYear, currentMonth, startDate + i);
     const year = nextDate.getFullYear();
-    const month = String(nextDate.getMonth() + 1)
-    const day = String(nextDate.getDate())
+    const month = String(nextDate.getMonth() + 1).padStart(2, "0");
+    const day = String(nextDate.getDate()).padStart(2, "0");
     availableDates.push(`${year}-${month}-${day}`);
   }
   return availableDates;
